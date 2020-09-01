@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+</head>
+<body>
+<h1>Users view</h1>
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Surname</th>
+            <th scope="col">Joined date</th>
+            <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr th:each="user : ${allUsers}">
+                <form th:action="@{/deleteuser}" method="post" th:object="${user}">
+                    <td th:text="${user.id}"></td>
+                    <td th:text="${user.name}"></td>
+                    <td th:text="${user.surname}"></td>
+                    <td th:text="${user.joinDate}"></td>
+                    <td>
+                        <input type="hidden" name="id" th:value="${user.id}"/>
+                        <input type="hidden" name="name" th:value="${user.name}"/>
+                        <input type="hidden" name="surname" th:value="${user.surname}"/>
+                        <button type="submit">Usun</button>
+                    </td>
+                </form>
+            </tr>
+        </tbody>
+    </table>
+
+<form th:action="@{/index}">
+    <button class="btn btn-danger" type="submit">Powrót</button>
+</form>
+
+</body>
+</html>
